@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>LuckyBox Store Page</title>
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/boxeslist">LuckyBox Store</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/boxeslist">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/addBox" sec:authorize="hasAuthority('ADMIN')">Add Box</a>
+            </li>
+        </ul>
+        <form th:action="@{/logout}" METHOD="POST" class="form-inline my-2 my-lg-0">
+            <h5 th:inline="text" style="padding-right: 20px">[[${#httpServletRequest.remoteUser}]]</h5>
+            <button class="btn btn-danger my-2 my-sm-0" type="submit">Sign out</button>
+        </form>
+    </div>
+</nav>
+<div class="card" style="width: 18rem; display: inline-block; text-align: center; margin: 6px" th:each = "userboxes: ${boxes}">
+    <img class="card-img-top" th:src="${userboxes.img}" th:alt="${userboxes.alt}" />
+    <div class="card-body">
+        <h5 class="card-title" th:text="${userboxes.name}"></h5>
+        <p class="card-text" th:text="${userboxes.category}"></p>
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item" th:text="${userboxes.price} + €"></li>
+        <li class="list-group-item" th:text="${userboxes.date}"></li>
+    </ul>
+    <div class="card-body">
+        <td><a th:href="@{/purchase/{id}(id=${userboxes.userboxesid})}" class="btn btn-success">Purchase</a></td>
+        <td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/edit/{id}(id=${userboxes.userboxesid})}" class="btn btn-primary">Edit</a></td>
+        <td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${userboxes.userboxesid})}" class="btn btn-danger">Delete</a></td>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</body>
+</html>

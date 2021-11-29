@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>LuckyBox | Purchase Page</title>
+  <link type="text/css" rel="stylesheet" href="../css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container my-3">
+  <div class="card" style="width: 18rem; display: inline-block; text-align: center; margin: 6px" th:each = "userboxes: ${boxes}">
+    <img class="card-img-top" th:src="${userboxes.img}" th:alt="${userboxes.alt}" />
+    <div class="card-body">
+      <h5 class="card-title" th:text="${userboxes.name}"></h5>
+      <p class="card-text" th:text="${userboxes.category}"></p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item" th:text="${userboxes.price} + €"></li>
+      <li class="list-group-item" th:text="${userboxes.date}"></li>
+    </ul>
+    <div class="card-body">
+      <td><a href="/boxeslist" class="btn btn-danger">Back</a></td>
+      <td><a href="/boxeslist" class="btn btn-success">Purchase</a></td>
+    </div>
+  </div>
+</div>
+<a href="/boxeslist" class="btn btn-danger">Back</a>
+<a href="/boxeslist" class="btn btn-success">Purchase</a>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>
