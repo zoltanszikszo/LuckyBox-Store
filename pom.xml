@@ -75,6 +75,7 @@
 						</env>
 					</image>
 				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 	<repositories>
