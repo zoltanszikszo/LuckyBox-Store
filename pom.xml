@@ -138,9 +138,6 @@
 					<scope>test</scope>
 				</dependency>
 			</dependencies>
-			<dependencies>
-
-			</dependencies>
 			<build>
 				<plugins>
 					<plugin>
